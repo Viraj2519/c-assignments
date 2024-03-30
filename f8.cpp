@@ -24,7 +24,25 @@ int main(int argc, char** argv) {
 	strncpy(myArgs.theText, argv[2], sizeof(myArgs.theText) - 1);
 	strncpy(myArgs.directoryPath, argv[3], sizeof(myArgs.directoryPath) - 1);
 	strncpy(myArgs.filename, argv[4], sizeof(myArgs.filename) - 1);
+	
+	FILE* file;
+	char nameAndPath[MAX_SIZE * 2];
+	sprintf(nameAndPath, "%s/%s", myArgs.directoryPath, myArgs.filename);
+	
+	file = fopen(nameAndPath, "w");
+		if (!file) {
+		printf("unable to create a the file");
+		return 0;
 		
+	}
+	for (int i = 0; i < myArgs.howMany; i++) {
+		fprintf(file, "%s\n", myArgs.theText);
+		
+	}
+	fclose(file);
+	
+	printf("file has been successfully created at the specified destination");
+	
 	return 0;
 }
 
